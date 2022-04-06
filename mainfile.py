@@ -30,3 +30,10 @@ class ColoredLines:
         pygame.display.set_caption("COLORED LINES GAME")
         self.draw_Grid()
         pygame.display.flip()
+
+    def events(self):
+        event_list = get_events()
+        for event in event_list:
+            self.single_Event(event)
+
+    
