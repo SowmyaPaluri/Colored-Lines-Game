@@ -30,3 +30,15 @@ class ColoredLines:
         pygame.display.set_caption("COLORED LINES GAME")
         self.draw_Grid()
         pygame.display.flip()
+
+    def play_game(self):
+        self.generate_Ball()
+        pygame.display.flip()
+        while not self.close:
+            self.clock.tick(30)
+            self.events()
+            if self.end_Game():
+                self.window.fill((0, 0, 0))
+                self.message_Display("GAME OVER", self.width/2, self.height/2, 50)
+                time.sleep(3)
+                break
