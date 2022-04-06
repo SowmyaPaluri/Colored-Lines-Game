@@ -42,3 +42,5 @@ class ColoredLines:
                 self.message_Display("GAME OVER", self.width/2, self.height/2, 50)
                 time.sleep(3)
                 break
+                def play_game(self):
+        
