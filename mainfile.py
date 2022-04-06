@@ -30,3 +30,5 @@ class ColoredLines:
         pygame.display.set_caption("COLORED LINES GAME")
         self.draw_Grid()
         pygame.display.flip()
+             
+        
