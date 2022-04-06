@@ -10,7 +10,7 @@ from pygame.draw import circle as draw_circle
 
 pygame.init()
 
-class ColoredLine:
+class ColoredLines:
     def __init__(self):
         self.height = 700
         self.width = 900
@@ -20,13 +20,13 @@ class ColoredLine:
         self.colormap = [[[] for i in range(9)] for j in range(9)]
         self.close = False
         self.clock = pygame.time.Clock()
-        self.color = ['red', 'white', 'purple', 'yellow', 'blue', 'orange']
+        self.color = ['red', 'pink', 'purple', 'yellow', 'blue', 'orange']
         self.mouse_pos = [0, 0]
         self.mouse_cond = 0
         self.last_ball = [0, 0]
         self.score = 0
     
-    def create_window(self):
+    def creating_window(self):
         pygame.display.set_caption("COLORED LINES GAME")
         self.draw_Grid()
         pygame.display.flip()
