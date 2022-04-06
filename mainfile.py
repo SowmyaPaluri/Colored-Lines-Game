@@ -30,3 +30,16 @@ class ColoredLine:
         pygame.display.set_caption("COLORED LINES GAME")
         self.draw_Grid()
         pygame.display.flip()
+
+    def events(self):
+        event_list = get_events()
+        for event in event_list:
+            self.single_Event(event)
+
+    def single_Event(self, event):
+        if event.type == QUIT:
+            self.close = True
+        elif event.type == MOUSEBUTTONUP:
+            self.mouse_pos[0], self.mouse_pos[1] = event.pos
+            self.move_Ball()
+            self.check_Ball()
