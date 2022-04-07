@@ -133,6 +133,36 @@ class ColoredLines:
                     self.generate_Ball()
             else:
                 pass
+                
+    def check_Ball(self):
+        s = 0
+        c = columncheck(self.colormap)
+        for i in c:
+            if(self.ballmap[i[0]][i[1]] == 0):
+                s = 1
+                self.score += 2
+            self.ballmap[i[0]][i[1]] = 1
+        c = rowcheck(self.colormap)
+        for i in c:
+            if(self.ballmap[i[0]][i[1]] == 0):
+                s = 1
+                self.score += 2
+            self.ballmap[i[0]][i[1]] = 1
+        c = left_diagonal(self.colormap)
+        for i in c:
+            if(self.ballmap[i[0]][i[1]] == 0):
+                s = 1
+                self.score += 2
+            self.ballmap[i[0]][i[1]] = 1
+        c = right_diagonal(self.colormap)
+        for i in c:
+            if(self.ballmap[i[0]][i[1]] == 0):
+                s = 1
+                self.score += 2
+            self.ballmap[i[0]][i[1]] = 1
+        self.draw_Ball()
+        if s == 0:
+            return True           
 
 
     def end_Game(self):
