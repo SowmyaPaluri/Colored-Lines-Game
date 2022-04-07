@@ -102,6 +102,38 @@ class ColoredLines:
 
         pygame.display.flip()
 
+    def move_Ball(self):
+
+        grid_h = self.height / 11
+        x_pos = self.mouse_pos[0] - grid_h
+        y_pos = self.mouse_pos[1] - grid_h
+        mou_pos = [int(x_pos / grid_h), int(y_pos / grid_h)]
+        if mou_pos[0] > 8 or mou_pos[1] > 8:
+            return
+        if self.ballmap[mou_pos[0]][mou_pos[1]] == 0:
+            self.mouse_cond = 1
+            self.last_ball = mou_pos
+        elif self.ballmap[mou_pos[0]][mou_pos[1]] == 1:
+            if self.mouse_cond == 1:
+                m = copy.deepcopy(self.ballmap)
+                m[self.last_ball[0]][self.last_ball[1]] = 1
+                s = walk(m, self.last_ball[0], self.last_ball[1], 
+                    mou_pos[0], mou_pos[1])
+                if(s != 1):
+                    return
+                self.ballmap[mou_pos[0]][mou_pos[1]] = 0
+                self.ballmap[self.last_ball[0]][self.last_ball[1]] = 1
+                self.colormap[mou_pos[0]][mou_pos[1]] = self.colormap[self.last_ball[0]][self.last_ball[1]]
+                self.colormap[self.last_ball[0]][self.last_ball[1]] = []
+                self.mouse_cond = 0
+                self.draw_Ball()
+                time.sleep(0.2)
+                if self.check_Ball():
+                    time.sleep(0.2)
+                    self.generate_Ball()
+            else:
+                pass
+
 
     def end_Game(self):
         s = 0
