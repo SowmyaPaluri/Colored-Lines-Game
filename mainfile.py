@@ -41,8 +41,7 @@ class ColoredLines:
             self.close = True
         elif event.type == MOUSEBUTTONUP:
             self.mouse_pos[0], self.mouse_pos[1] = event.pos
-            self.move_Ball()
-            self.check_Ball()
+
 
     def play_game(self):
         self.generate_Ball()
