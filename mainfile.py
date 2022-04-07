@@ -56,53 +56,19 @@ class ColoredLines:
                 time.sleep(3)
                 break
 
-        
-
-    def generate_Ball(self):
-        array = [i for i in range(81)]
-        for i in range(9):
-            for j in range(9):
-                if self.ballmap[i][j] == 0:
-                    array.remove(i * 9 + j)
-        random_ball = [0, 0, 0]
-        for i in range(3):
-            random_ball[i] = random.choice(array)
-            array.remove(random_ball[i])
-            self.ballmap[int(random_ball[i] / 9)][int(random_ball[i] % 9)] = 0
-        for i in range(3):
-            c = random.choice(self.color)
-            self.colormap[int(random_ball[i] / 9)][int(random_ball[i] % 9)] = c
-        self.draw_Ball()
-
-    def draw_Ball(self):
-        self.window.fill((0, 0, 0))
-        self.draw_Grid()
-        grid_h = self.height / 11
-        for i in range(9):
-            for j in range(9):
-                if self.ballmap[i][j] == 0:
-                    draw_circle(self.window, Color(self.colormap[i][j]),
-                                (int((i + 1.5) * grid_h), int((j + 1.5) * grid_h)),
-                                int(grid_h / 5 * 2))
-        
-        pygame.display.flip()
-
-
-    def end_Game(self):
-        s = 0
-        for i in range(9):
-            for j in range(9):
-                if self.ballmap[i][j] == 1:
-                    s += 1
-        if s > 3:
-            return False
-        else:
-            return True
-
-def main():
-    game = ColoredLine()
-    game.play_game()
-    pygame.display.quit()
-
-
-main()
+    def draw_Grid(self):
+        height_h = self.height
+        width_w = self.width
+        grid_h = height_h / 11
+        lines = [((grid_h, grid_h), (grid_h, height_h - grid_h)),
+                 ((grid_h, grid_h), (height_h - grid_h, grid_h)),
+                 ((grid_h, height_h - grid_h), (height_h - grid_h, height_h - grid_h)),
+                 ((height_h - grid_h, grid_h), (height_h - grid_h, height_h - grid_h))]
+        color = Color('gray')
+        for i in lines:
+            pygame.draw.line(self.window, color, i[0], i[1], 2)
+        for i in range(8):
+            pygame.draw.line(self.window, color,
+                             (grid_h * (i + 2), grid_h), (grid_h * (i + 2), height_h - grid_h))
+            pygame.draw.line(self.window, color,
+                             (grid_h, grid_h * (i + 2)), (height_h - grid_h, grid_h * (i + 2)))
