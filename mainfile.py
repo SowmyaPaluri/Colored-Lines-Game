@@ -55,3 +55,20 @@ class ColoredLines:
                 self.message_Display("GAME OVER", self.width/2, self.height/2, 50)
                 time.sleep(3)
                 break
+
+    def draw_Grid(self):
+        height_h = self.height
+        width_w = self.width
+        grid_h = height_h / 11
+        lines = [((grid_h, grid_h), (grid_h, height_h - grid_h)),
+                 ((grid_h, grid_h), (height_h - grid_h, grid_h)),
+                 ((grid_h, height_h - grid_h), (height_h - grid_h, height_h - grid_h)),
+                 ((height_h - grid_h, grid_h), (height_h - grid_h, height_h - grid_h))]
+        color = Color('gray')
+        for i in lines:
+            pygame.draw.line(self.window, color, i[0], i[1], 2)
+        for i in range(8):
+            pygame.draw.line(self.window, color,
+                             (grid_h * (i + 2), grid_h), (grid_h * (i + 2), height_h - grid_h))
+            pygame.draw.line(self.window, color,
+                             (grid_h, grid_h * (i + 2)), (height_h - grid_h, grid_h * (i + 2)))
