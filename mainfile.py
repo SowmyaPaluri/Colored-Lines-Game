@@ -70,6 +70,38 @@ def walk(mp, x, y, a, b):
         switch = walk(mp, x + 1, y, a, b)
         if switch == 1:
             return 1
+ def rowcheck(matrix):
+ 
+    newcolumnlist = []
+ 
+    for row in range(9):
+        column = 0
+        rowcount = 0
+        columncount = 0
+        columnlist = []
+        zu = (row, column)
+        columnlist.append(zu)
+       
+        for i in range(8):
+           
+            if matrix[row][column] == matrix[row][column + 1]:
+                rowcount += 1
+                zu = (row, column + 1)
+                columnlist.append(zu)
+            
+            if matrix[row][column] != matrix[row][column + 1] and rowcount < 4:
+                rowcount = 0
+                columnlist = []
+                zu = (row, column + 1)
+                columnlist.append(zu)
+            if matrix[row][column] != matrix[row][column + 1] and rowcount >= 4:
+                break
+            column += 1
+        if rowcount >= 4:
+            for i in columnlist:
+                newcolumnlist.append(i)
+        row += 1
+    return(newcolumnlist)           
             
 
 
