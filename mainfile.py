@@ -172,6 +172,47 @@ def walk(mp, x, y, a, b):
                     break
                 row += 1
                 column += 1
+    column = 0
+    row = 1
+    a = 0
+    leftslop = []
+    for row in range(5):
+        column = 0
+        count = 0
+        leftslop = []
+        a = 0
+        if row == 1 and column == 0:
+            a = 8
+            z = (1, 0)
+        elif row == 2 and column == 0:
+            a = 7
+            z = (2, 0)
+        elif row == 3 and column == 0:
+            a = 6
+            z = (3, 0)
+        elif row == 4 and column == 0:
+            a = 5
+            z = (4, 0)
+        leftslop.append(z)
+        for i in range(a - 1):
+            if matrix[row][column] == matrix[row + 1][column + 1]:
+                count += 1
+                z = (row + 1, column + 1)
+                leftslop.append(z)
+            elif matrix[row][column] != matrix[row + 1][column + 1] and count < 4:
+                count = 0
+                leftslop = []
+                z = (row + 1, column + 1)
+                leftslop.append(z)
+            elif matrix[row][column] != matrix[row + 1][column + 1] and count >= 4:
+                break
+            row += 1
+            column += 1
+        if count >= 4:
+            for i in leftslop:
+                newleftslop.append(i)
+        row += 1
+    return(newleftslop) 
         if count >= 4:
             for i in leftslop:
                     newleftslop.append(i)
