@@ -10,6 +10,44 @@ from pygame.draw import circle as draw_circle
 
 pygame.init()
 
+def check_valid(mg, x, y):
+    if x >= 0 and x < len(mg) and y >= 0 and y < len(mg[0]) and mg[x][y] == 1:
+        return True
+    else:
+        return False
+
+
+def process(step):
+    # Checking the next point that cannot reach.
+    change_records = []
+    for i in range(len(step) - 1):
+        if (abs(step[i][0] - step[i + 1][0]) == 0 and 
+            abs(step[i][1] - step[i + 1][1]) == 1) or \
+                        (abs(step[i][0] - step[i + 1][0]) == 1 
+                        and abs(step[i][1] - step[i + 1][1]) == 0):
+            pass
+        else:
+            change_records.append(i + 1)
+    # print(change_records)
+    # According to these points to find the farthest retreat point.
+    clip_nums = []
+    for i in change_records:
+        for j in range(i):
+            if (abs(step[j][0] - step[i][0]) == 0 and 
+                abs(step[j][1] - step[i][1]) == 1) or \
+                        (abs(step[j][0] - step[i][0]) == 1 and 
+                        abs(step[j][1] - step[i][1]) == 0):
+                break
+        clip_nums.append((j, i))
+    # print(clip_nums)
+    # Reverse processing to prevent the mark move to below.
+    record = []
+    for i in clip_nums[::-1]:
+        if not (i[0] in record or i[1] in record):
+            step = step[:i[0] + 1] + step[i[1]:]
+        record += list(range(i[0], i[1]))
+
+
 class ColoredLines:
     def __init__(self):
         self.height = 700
