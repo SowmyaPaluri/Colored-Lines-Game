@@ -47,6 +47,35 @@ def process(step):
             step = step[:i[0] + 1] + step[i[1]:]
         record += list(range(i[0], i[1]))
 
+    def columncheck(matrix):
+        newrowlist = []
+        for column in range(9):
+            row = 0
+            column_count = 0
+            row_list = []
+            z = (row,column)
+            row_list.append(z)
+            for i in range(8):
+                if matrix[row][column] == matrix[row+1][column]:
+                    column_count+=1
+                    z = (row+1,column)
+                    row_list.append(z)
+                    elif matrix[row][column] != matrix[row+1][column] and column_count<4:
+                        column_count =0
+                        row_list = []
+                        z = (row+1,column)
+                        row_list.append(z)
+                    elif matrix[row][column] != matrix[row+1][column] and column_count>=4:
+                        break
+                    row+=1
+                if column_count >= 4:
+                    for i in row_list:
+                        newrowlist.append(i)
+                column +=1
+            return(newrowlist)
+
+
+
 
 class ColoredLines:
     def __init__(self):
