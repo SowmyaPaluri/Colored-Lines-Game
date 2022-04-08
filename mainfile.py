@@ -46,6 +46,31 @@ def process(step):
         if not (i[0] in record or i[1] in record):
             step = step[:i[0] + 1] + step[i[1]:]
         record += list(range(i[0], i[1]))
+step = []
+
+
+def walk(mp, x, y, a, b):
+    global step
+    if x == a and y == b:
+        step.append((x, y))
+        process(step)
+        return 1
+    if check_valid(mp, x, y):
+        step.append((x, y))
+        mp[x][y] = 2
+        switch = walk(mp, x, y + 1, a, b)
+        if switch == 1:
+            return 1
+        switch = walk(mp, x, y - 1, a, b)
+        if switch == 1:
+            return 1
+        switch = walk(mp, x - 1, y, a, b) 
+        if switch == 1:
+            return 1
+        switch = walk(mp, x + 1, y, a, b)
+        if switch == 1:
+            return 1
+            
 
 
 class ColoredLines:
