@@ -131,6 +131,51 @@ def walk(mp, x, y, a, b):
                 column +=1
             return(newrowlist)
 
+            
+    def left_diagonal(matrix):
+    column = 0
+    newleftslop = []
+
+    for column in range(5):
+        row = 0
+        count = 0
+        leftslop = []
+        a = 0
+        z = ()
+        if row == 0 and column == 0:
+            a = 9
+            z = (0, 0)
+        elif row == 0 and column == 1:
+            a = 8
+            z = (0, 1)
+        elif row == 0 and column == 2:
+            a = 7
+            z = (0, 2)
+        elif row == 0 and column == 3:
+            a = 6
+            z = (0, 3)
+        elif row == 0 and column == 4:
+            a = 5
+            z = (0, 4)
+        leftslop.append(z)
+        for i in range(a - 1):
+                if matrix[row][column] == matrix[row + 1][column + 1]:
+                    count += 1
+                    z = (row+1, column+1)
+                    leftslop.append(z)
+                elif matrix[row][column] != matrix[row + 1][column + 1] and count < 4:
+                    count = 0
+                    leftslop = []
+                    z = (row + 1, column + 1)
+                    leftslop.append(z)
+                elif matrix[row][column] != matrix[row + 1][column + 1] and count >= 4:
+                    break
+                row += 1
+                column += 1
+        if count >= 4:
+            for i in leftslop:
+                    newleftslop.append(i)
+        column += 1
 
 
 
